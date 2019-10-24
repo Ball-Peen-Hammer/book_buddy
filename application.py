@@ -38,7 +38,6 @@ def load_user(id):
 @login_required
 def books():
     form = SearchForm()
-    count = 0
     if request.method == "POST":
         isbn = request.form["isbn"]
         title = request.form["title"]
