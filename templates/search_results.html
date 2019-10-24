@@ -1,0 +1,43 @@
+k{% from 'form_helper.html' import displayField %}
+{% extends "layout.html" %}
+
+{% block heading %}
+    Book Buddy
+{% endblock %}
+
+{% block body %}
+ 
+
+<h2>Book search result</h2> 
+<ul>
+    <li>ISBN:<br><strong>{{ books.isbn }}</strong></li>
+    <li>TITLE:<br><strong>{{ books.title }}</strong></li>
+    <li>AUTHOR:<br><strong>{{ books.author }}</strong></li>
+    <li>YEAR:<br><strong>{{ books.year }}</strong></li>
+    <li>Goodreads Ratings Count:  {{ rtngs_count }}</li>
+    <li>Goodreads Average Rating:  {{ average }}</li>  
+</ul>
+
+<ol>
+    {% for r in user_reviews %}
+        <li><strong>User:</strong><a href="/user/{{r.user.id}}">{{ r.user_id }}</a><strong> Score:</strong>{{ r.user_score }}<br><strong>Written review:</strong><br> {{ r.user_review }}</li>  
+    {% endfor %}
+</0l>
+<div class="form-wrapper">
+    <form action="{{ url_for('book_review') }}" method="post">
+      <div class="form-group">
+          {{ form.csrf_token }}
+          {{ displayField(form.score, 'Enter review score (1-5)') }}
+          {{ displayField(form.user_review, 'Write short review') }}
+          <div class="submitbutton">
+            {{ form.submit(class_="btn btn-primary") }}
+          </div>
+
+      </div>  
+</div>
+</form>
+ 
+
+    
+
+{% endblock %}

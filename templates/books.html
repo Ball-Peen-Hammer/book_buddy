@@ -1,0 +1,63 @@
+{% from 'form_helper.html' import displayField %}
+{% extends 'layout.html' %}
+
+{% block title %}Library{% endblock %}
+
+
+{% block body %}
+    <h1>Library search</h1>
+
+    
+    
+ <h2>{{ wanted_book }}</h2>
+
+ <div class="formwrapper">
+    <form action="{{ url_for('books')}}" method="POST">
+        <div class="form-group">
+            {{ form.csrf_token }}
+            <input type="hidden" autocomplete="on" form="form" formmethod="post">
+        
+            {{ displayField(form.isbn, 'ISBN search') }}
+            {{ displayField(form.title, 'Title search') }}
+            {{ displayField(form.author, 'Author search') }}
+        <div class="submitbutton">
+            {{ form.submit(class_="btn btn-primary") }}
+        </div>
+        </div>
+    </form>
+ </div>
+    <form action="{{ url_for('search_results') }}" method="POST">
+        <div class="form-group">
+             
+            <select class="form-control" name="book_id" size="10">
+        
+                {% for book in books %}
+                    <option value="{{ book.id }}">{{ book.title }}</option>
+                {% endfor %}
+                    <option value="" selected="selected" hidden="hidden">Choose here</option>
+            </select>
+
+        </div>
+    
+    <div class="form-group">
+        {{ form.csrf_token }}
+        {{ form.submit(class_="btn btn-primary") }}
+    </div>
+    </form>   
+        
+    
+    
+            
+         
+    
+
+      
+     
+  
+ 
+        
+      
+
+  
+
+{% endblock %}

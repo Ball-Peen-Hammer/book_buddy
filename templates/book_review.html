@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    Book Buddy
+{% endblock %}
+
+{% block body %}
+    
+    {% if current_user.is_authenticated %}
+        <h1>Hi:    {{ current_user.username }}</h1>
+    {% endif %}
+ 
+    <h1> Your Review of book:   {{ book.title }}</h1> 
+    
+    <h2>Score: {{ score }}</h2>
+    <h2>Review: {{ review }}</h2>
+
+    
+           
+
+        
+ 
+
+{% endblock %}
