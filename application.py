@@ -166,7 +166,7 @@ def api(isbn):
     key = os.getenv("API_KEY")
     res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"isbns": isbn, "key": key})
     if res.status_code != 200:
-        return jsonify({"error": "Invalid ISBN or book not in database"}), 422
+        raise Exception("ERROR: API request unsuccessful.")
     data = res.json()
     reviews_count = data["books"][0]['reviews_count']
     average = data["books"][0]['average_rating']
